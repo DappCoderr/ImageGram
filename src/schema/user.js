@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const scheme = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     userName: {
       type: String,
@@ -31,6 +31,7 @@ const scheme = new mongoose.Schema(
   { timestamps: true }
 );
 
-const user = mongoose.model("user", scheme);
+// This line create the collection
+const user = mongoose.model("User", userSchema);
 
 export default user;
