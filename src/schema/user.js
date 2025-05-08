@@ -32,6 +32,6 @@ const userSchema = new mongoose.Schema(
 );
 
 // This line create the collection
-const user = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-export default user;
+export default User;
