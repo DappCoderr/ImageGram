@@ -9,9 +9,21 @@ export const createPost = async (caption, image, user) => {
   }
 };
 
-export const findAllPost = async () => {
+export const countAllPost = async () => {
   try {
-    const posts = await Post.find();
+    const count = await Post.countDocuments();
+    return count;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const findAllPost = async (offset, limit) => {
+  try {
+    const posts = await Post.find()
+      .sort({ createdAt: -1 })
+      .skip(offset)
+      .limit(limit);
     return posts;
   } catch (error) {
     console.log(error);
@@ -36,9 +48,9 @@ export const deletePostById = async (id) => {
   }
 };
 
-export const updatePostById = async (id) => {
+export const updatePostById = async (id, updateObj) => {
   try {
-    const post = await Post.findByIdAndUpdate(id);
+    const post = await Post.findByIdAndUpdate(id, updateObj, { new: true });
     return post;
   } catch (error) {
     console.log(error);
