@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema(
   {
@@ -23,13 +24,21 @@ const userSchema = new mongoose.Schema(
       },
     },
     password: {
-      type: string,
+      type: String,
       required: true,
       minLength: 5,
     },
   },
   { timestamps: true }
 );
+
+userSchema.pre("save", function modifyPassword(next) {
+  const user = this;
+  const SALT = bcrypt.genSaltSync(9);
+  const hashPassword = bcrypt.hashSync(user.password, SALT);
+  user.password = hashPassword; 
+  next();
+});
 
 // This line create the collection
 const User = mongoose.model("User", userSchema);
