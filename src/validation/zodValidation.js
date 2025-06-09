@@ -1,12 +1,13 @@
-export const validate = (schema) => {
-  return async (req, res, next) => {
-    try {
-      schema.parse(req.body);
-      next();
-    } catch (error) {
+export function validate(schema) {
+  return (req, res, next) => {
+    const result = schema.safeParse(req.body);
+    if (!result.success) {
+      console.log("Validation failed:", result.error.errors);
       return res
         .status(400)
-        .json({ success: false, message: "Failed", error: error.errors });
+        .json({ success: false, error: result.error.errors });
     }
+    req.body = result.data;
+    next();
   };
-};
+}

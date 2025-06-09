@@ -19,10 +19,14 @@ export const findAllUser = async () => {
   }
 };
 
-export const signup = async (userName, userEmail, userPassword) => {
+export const createUser = async (userName, email, password) => {
   try {
-    const userSignup = await User.create({ userName, userEmail, userPassword });
-    return userSignup;
+    const newUser = await User.create({
+      userName,
+      email,
+      password,
+    });
+    return newUser;
   } catch (error) {
     console.log("Something went wrong", error);
     throw error;
