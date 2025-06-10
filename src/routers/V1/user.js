@@ -1,7 +1,11 @@
 import express from "express";
-import { userController } from "../../controller/userController.js";
+import {
+  signInController,
+  signUpController,
+} from "../../controller/userController.js";
 import { validate } from "../../validation/zodValidation.js";
 import { zodSignupSchema } from "../../validation/zodSignupSchema.js";
+import { zodSignInSchema } from "../../validation/zodSinginSchema.js";
 
 const router = express.Router();
 
@@ -10,7 +14,7 @@ function dummyGetUserProfile(req, res) {
 }
 
 router.get("/", dummyGetUserProfile);
-
-router.post("/signup",validate(zodSignupSchema), userController);
+router.post("/signup", validate(zodSignupSchema), signUpController);
+router.post("/signin", signInController);
 
 export default router;

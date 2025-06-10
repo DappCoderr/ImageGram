@@ -1,9 +1,8 @@
-import { email } from "zod/v4";
 import User from "../schema/user.js";
 
-export const findUserByEmailId = async (mailId) => {
+export const findUserByEmail = async (email) => {
   try {
-    const user = await User.findOne({ mailId });
+    const user = await User.findOne({ email });
     return user;
   } catch (error) {
     console.log(error);
