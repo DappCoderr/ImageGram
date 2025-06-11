@@ -71,9 +71,6 @@ export const updatePost = async (req, res) => {
   try {
     const updateObject = req.body;
     console.log(updateObject);
-    // if (req.imageUrl) {
-    //   updateObject.image = req.imageUrl;
-    // }
     const response = await updatePostService(req.params.id, updateObject);
     res.status(200).json({ success: true, message: response });
   } catch (error) {

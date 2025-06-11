@@ -9,7 +9,7 @@ import { uploadToCloudinary } from "../../config/cloudinaryConfig.js";
 import { upload } from "../../config/multerConfig.js";
 import { validate } from "../../validation/zodValidation.js";
 import { zodPostSchema } from "../../validation/zodPostSchema.js";
-import { isAuthenticated } from "../../middleware/authMiddleware.js";
+import { isAdmin, isAuthenticated } from "../../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -23,6 +23,6 @@ router.post(
   createPostController
 );
 router.delete("/:id", isAuthenticated, deletePost);
-router.put("/:id", isAuthenticated, updatePost);
+router.put("/:id", isAuthenticated, isAdmin, updatePost);
 
 export default router;

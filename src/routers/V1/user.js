@@ -13,6 +13,32 @@ function dummyGetUserProfile(req, res) {
 }
 
 router.get("/", dummyGetUserProfile);
+
+/**
+ * @openapi
+ * /signup:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: User signup
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User signed up successfully
+ */
+
 router.post("/signup", validate(zodSignupSchema), signUpController);
 router.post("/signin", signInController);
 
