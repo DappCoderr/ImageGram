@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       minLength: 5,
     },
+    role: {
+      type: String,
+      default: "user",
+      enum: ["user", "admin"],
+    },
   },
   { timestamps: true }
 );
@@ -36,7 +41,7 @@ userSchema.pre("save", function modifyPassword(next) {
   const user = this;
   const SALT = bcrypt.genSaltSync(9);
   const hashPassword = bcrypt.hashSync(user.password, SALT);
-  user.password = hashPassword; 
+  user.password = hashPassword;
   next();
 });
 

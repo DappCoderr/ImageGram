@@ -25,3 +25,14 @@ export const isAuthenticated = async (req, res, next) => {
     next();
   } catch (error) {}
 };
+
+export const isAdmin = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(400).json({
+      success: false,
+      message: "Unauthorized User",
+    });
+  }
+
+  next();
+};
