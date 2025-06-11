@@ -4,6 +4,7 @@ import {
   createPost as createPostRepo,
   deletePostById,
   updatePostById,
+  findPostById,
 } from "../repositories/postRepository.js";
 
 export const createPostService = async (createPostObj) => {
@@ -29,8 +30,15 @@ export const getAllPostService = async (offset, limit) => {
   }
 };
 
-export const deletePostService = async (id) => {
+export const deletePostService = async (id, user) => {
   try {
+    const post = await findPostById(id);
+    if (post.userID._id != user) {
+      throw {
+        status: 401,
+        message: "Unauthorize user",
+      };
+    }
     const deletePost = await deletePostById(id);
     return deletePost;
   } catch (error) {

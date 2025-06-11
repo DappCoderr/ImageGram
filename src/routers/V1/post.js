@@ -22,7 +22,7 @@ router.post(
   // validate(zodPostSchema),
   createPostController
 );
-router.delete("/:id", deletePost);
-router.put("/:id", updatePost);
+router.delete("/:id", isAuthenticated, deletePost);
+router.put("/:id", isAuthenticated, updatePost);
 
 export default router;

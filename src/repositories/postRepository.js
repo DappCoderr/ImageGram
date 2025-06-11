@@ -20,7 +20,7 @@ export const countAllPost = async () => {
 
 export const findAllPost = async (offset, limit) => {
   try {
-    const posts = await Post.find()
+    const posts = await Post.find().populate("userID", "userName email")
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit);

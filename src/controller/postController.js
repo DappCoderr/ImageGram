@@ -43,17 +43,27 @@ export const getAllThePost = async (req, res) => {
 export const deletePost = async (req, res) => {
   try {
     const id = req.params.id;
-    const response = await deletePostService(id);
+    const response = await deletePostService(id, req.user._id);
     if (!response) {
       return res.status(404).json({
         success: false,
         message: "Post Not Found",
       });
     }
-    return res.status(200).json({ success: true, message: response });
+    return res.status(200).json({
+      success: true,
+      message: "Post Deleted Successfully",
+      data: response,
+    });
   } catch (error) {
     console.log(error);
-    res.status(501).json({ success: false, message: "Deletion Fail" });
+    if (error.status) {
+      return res.status(error.status).json({
+        success: false,
+        message: error.message,
+      });
+    }
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
