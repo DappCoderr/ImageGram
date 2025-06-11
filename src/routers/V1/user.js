@@ -5,7 +5,6 @@ import {
 } from "../../controller/userController.js";
 import { validate } from "../../validation/zodValidation.js";
 import { zodSignupSchema } from "../../validation/zodSignupSchema.js";
-import { zodSignInSchema } from "../../validation/zodSinginSchema.js";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import { verifyJwt } from "../utils/jwt";
+import { verifyJwt } from "../utils/jwt.js";
 import { checkIfUserExists } from "../services/userService.js";
 
 export const isAuthenticated = async (req, res, next) => {
@@ -20,6 +20,7 @@ export const isAuthenticated = async (req, res, next) => {
         message: "User not found",
       });
     }
+    console.log("---------JWTRes--------", response);
     req.user = response;
     next();
   } catch (error) {}

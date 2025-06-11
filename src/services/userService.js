@@ -1,5 +1,5 @@
-import { createUser, findUserByEmail } from "../repositories/userRepository.js";
 import bcrypt from "bcrypt";
+import { createUser, findUserByEmail } from "../repositories/userRepository.js";
 import { generateJWTToken } from "../utils/jwt.js";
 
 export const signupService = async (userObj) => {

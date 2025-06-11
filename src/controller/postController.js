@@ -10,8 +10,11 @@ export const createPostController = async (req, res) => {
     console.log("controller", req.body);
     const caption = req.body.caption;
     const image = req.imageUrl;
+    const userId = req.user._id;
 
-    const post = await createPostService({ caption, image });
+    console.log("-------userId---------", userId);
+
+    const post = await createPostService({ caption, image, userId });
 
     return res.status(201).json({
       success: true,

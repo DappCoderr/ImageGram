@@ -8,8 +8,8 @@ import {
 
 export const createPostService = async (createPostObj) => {
   try {
-    const { caption, image } = createPostObj;
-    const post = await createPostRepo(caption, image);
+    const { caption, image, userId } = createPostObj;
+    const post = await createPostRepo(caption, image, userId);
     return post;
   } catch (error) {
     console.log("Something went wrong", error);

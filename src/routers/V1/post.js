@@ -9,15 +9,17 @@ import { uploadToCloudinary } from "../../config/cloudinaryConfig.js";
 import { upload } from "../../config/multerConfig.js";
 import { validate } from "../../validation/zodValidation.js";
 import { zodPostSchema } from "../../validation/zodPostSchema.js";
+import { isAuthenticated } from "../../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/", getAllThePost);
 router.post(
   "/",
+  isAuthenticated,
   upload.single("image"),
   uploadToCloudinary,
-  validate(zodPostSchema),
+  // validate(zodPostSchema),
   createPostController
 );
 router.delete("/:id", deletePost);
