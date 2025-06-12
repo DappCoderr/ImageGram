@@ -5,6 +5,7 @@ import { isAuthenticated } from "./middleware/authMiddleware.js";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { options } from "./utils/swaggerOptions.js";
+import ip from "ip";
 
 const PORT = 3000;
 
