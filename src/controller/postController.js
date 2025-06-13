@@ -63,7 +63,9 @@ export const deletePost = async (req, res) => {
         message: error.message,
       });
     }
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
   }
 };
 
@@ -72,9 +74,9 @@ export const updatePost = async (req, res) => {
     const updateObject = req.body;
     console.log(updateObject);
     const response = await updatePostService(req.params.id, updateObject);
-    res.status(200).json({ success: true, message: response });
+    return res.status(200).json({ success: true, message: response });
   } catch (error) {
     console.log(error);
-    res.status(501).json({ success: false, message: "Update Fail" });
+    return res.status(501).json({ success: false, message: "Update Fail" });
   }
 };

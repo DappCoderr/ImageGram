@@ -4,7 +4,7 @@ export const signUpController = async (req, res) => {
   try {
     console.log("User Controller", req.body);
     const signupInfo = await signupService(req.body);
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "User successfully signed-up",
       data: signupInfo,
@@ -17,14 +17,16 @@ export const signUpController = async (req, res) => {
         message: error.message,
       });
     }
-    res.status(500).json({ success: false, message: "Create User Fail" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Create User Fail" });
   }
 };
 
 export const signInController = async (req, res) => {
   try {
     const signupInfo = await signInService(req.body);
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "User successfully signed-in",
       data: signupInfo,
@@ -37,6 +39,8 @@ export const signInController = async (req, res) => {
         message: error.message,
       });
     }
-    res.status(500).json({ success: false, message: "Create User Fail" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Create User Fail" });
   }
 };

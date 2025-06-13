@@ -18,6 +18,10 @@ export const createCommentService = async (
     // 5. save the comment
     // 6. return the comment
 
+    console.log(
+      `before fetch parent ${content}, ${onModel} and ${commentAbleId}`
+    );
+
     const parent = await fetchParent(onModel, commentAbleId);
     if (!parent) {
       throw {
@@ -25,6 +29,7 @@ export const createCommentService = async (
         message: `${onModel} not found`,
       };
     }
+    console.log("----------parent------------", parent);
     const newComment = await createComment(
       content,
       userId,
@@ -39,10 +44,26 @@ export const createCommentService = async (
   }
 };
 
+export const findCommentByIdService = async (id) => {
+  try {
+    const comment = await findCommentById(id);
+    if (!comment) {
+      throw {
+        status: 404,
+        message: "Comment Not Found",
+      };
+    }
+    return comment;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const addChildCommentToParent = async (onModel, comment, parent) => {
   try {
     if (onModel === "Post") {
-      parent.comment.push(comment._id);
+      parent.comments.push(comment._id);
     } else if (onModel === "Comment") {
       parent.replies.push(comment._id);
     }
