@@ -7,9 +7,20 @@ const postSchema = new mongoose.Schema(
       required: true,
       minLength: 5,
     },
-    likes: { type: Number, default: 0 },
     image: { type: String, required: true },
     userID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    replies: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like",
+      },
+    ],
   },
   { timestamps: true }
 );
