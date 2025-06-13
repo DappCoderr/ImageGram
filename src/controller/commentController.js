@@ -2,19 +2,22 @@ import { createCommentService } from "../services/commentService.js";
 
 export const createCommentController = async (req, res) => {
   try {
-    const commentInfo = req.body;
-    const id = req.params.id;
-    const data = await createCommentService(id, commentInfo);
+    const { content, onModel, commentAbleId } = req.body;
+    const response = await createCommentService(
+      content,
+      onModel,
+      commentAbleId
+    );
     res.status(201).json({
       success: true,
       message: "Comment created successfully",
-      data: data,
+      data: response,
     });
   } catch (error) {
     console.log("Something went wrong", error);
-    res.status(501).json({
+    res.status(500).json({
       success: false,
-      message: "Comment creation failed",
+      message: "Internal Server Error",
       data: error,
     });
   }

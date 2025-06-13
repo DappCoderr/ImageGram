@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema(
     },
     image: { type: String, required: true },
     userID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    replies: [
+    comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment",

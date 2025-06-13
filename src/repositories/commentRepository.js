@@ -1,6 +1,11 @@
 import Comment from "../schema/comment.js";
 
-export const createComment = async (content, userId, onModel, commentAbleId) => {
+export const createComment = async (
+  content,
+  userId,
+  onModel,
+  commentAbleId
+) => {
   try {
     const newComment = await Comment.create({
       content,
