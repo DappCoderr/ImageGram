@@ -6,6 +6,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { options } from "./utils/swaggerOptions.js";
 import ip from "ip";
+import { rateLimiter } from "./middleware/rateLimit.js";
 
 const PORT = 3000;
 
@@ -13,6 +14,8 @@ const swaggerDocs = swaggerJsdoc(options);
 
 const app = express();
 
+// applied rate limiter to all the request
+app.use(rateLimiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", apiRouter);
